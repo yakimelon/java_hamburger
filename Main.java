@@ -20,17 +20,19 @@ public class Main {
 
 	public static void makeHealthyBurger() {
 		// ヘルシーバーガーの結果
-		// TODO: 表示する
 		HealthyBurger healthyBurger = new HealthyBurger("ライ麦", "ベーコン", 500, "ヘルシー");
+		p(healthyBurger.baseBurger());
 		HealthyTopping avocado = new HealthyTopping("アボカド", 80);
 		HealthyTopping sesame = new HealthyTopping("アボカド", 30);
 		healthyBurger.addHealthyTopping(avocado);
 		healthyBurger.addHealthyTopping(sesame);
+		p(healthyBurger.itemizeBurger());
 	}
 
 	public static void makeDeluxeBurger() {
 		// デラックスバーガーの結果
 		DeluxeBurger deluxeBurger = new DeluxeBurger("デラックス", "ベーコン&ソーセージ", 1000, "バンズ&クラブ");
+		p(deluxeBurger.baseBurger());
 		Topping tomato = new Topping("トマト", 30);
 		deluxeBurger.addTopping(tomato);
 	}
