@@ -20,23 +20,28 @@ class Hamburger {
 		this.toppings = new ArrayList<Topping>();
 	}
 
-	public void toppingControll() {
+	// トッピング一覧表示
+	public void showTopping() {
 		this.toppings.forEach( (topping) -> { 
 			System.out.println("名称 : " + topping.getName() + "　値段 : " + topping.getCharge() + "円");
 		});
 	}
 	
+	// トッピング追加
 	public void addTopping(Topping topping) {
-		if ( this.toppings.size() >= 3 ) {
-			throw new IllegalStateException("トッピングは3つまでです。");
+		if ( this.toppings.size() >= 4 ) {
+			throw new IllegalStateException("トッピング4つまでです。");
 		}
+		System.out.println(topping.getName() + "を " + topping.getCharge() + " 円で加えます。");
 		this.toppings.add(topping);
 	}
 	
+	// このハンバーガーについての説明を返す
 	public String baseBurger() {
-		return "「" + this.bunsType + "」バンズと「" + this.meetType + "」からなる、「" + this.name + "」ハンバーガーの値段は、350円です。";
+		return "「" + this.bunsType + "」バンズと「" + this.meetType + "」からなる、「" + this.name + "」ハンバーガーの値段は、" + this.charge + " 円です。";
 	}
 	
+	// トッピングを含めた値段を返す
 	public String itemizeBurger() {
 		int charge = this.charge;
 		for ( Topping topping : this.toppings ) {
