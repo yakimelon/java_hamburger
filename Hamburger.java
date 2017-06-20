@@ -44,11 +44,11 @@ class Hamburger {
 	
 	// トッピングを含めた値段を返す
 	public String itemizeBurger() {
-		final int price = this.toppings
+		final int price = this.toppings.size() != 0 ? this.toppings
 			.stream()
 			.map( topping -> topping.getPrice() )
 			.reduce( (sum, n) -> sum + n )
-			.get();
+			.get() : 0;
 		return "トッピングを加えたバーガーの金額は、" + ( price + this.price ) + "円です。";
 	}
 }
