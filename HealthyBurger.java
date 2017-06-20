@@ -6,8 +6,8 @@ public class HealthyBurger extends Hamburger{
 
 	private ArrayList<HealthyTopping> healthyToppings;
 	
-	public HealthyBurger(String name, String meetType, int charge, String bunsType) {
-		super(name, meetType, charge, bunsType);
+	public HealthyBurger(String name, String meetType, int price, String bunsType) {
+		super(name, meetType, price, bunsType);
 		this.healthyToppings = new ArrayList<HealthyTopping>();
 	}
 	
@@ -16,7 +16,7 @@ public class HealthyBurger extends Hamburger{
 		if ( this.healthyToppings.size() >= 2 ) {
 			throw new IllegalStateException("ヘルシートッピングは2つまでです。");
 		}
-		System.out.println(topping.getName() + "を " + topping.getCharge() + " 円でヘルシートッピングとして加えます。");
+		System.out.println(topping.getName() + "を " + topping.getPrice() + " 円でヘルシートッピングとして加えます。");
 		this.healthyToppings.add(topping);
 	}
 	
@@ -25,23 +25,38 @@ public class HealthyBurger extends Hamburger{
 	public void showTopping() {
 		super.showTopping();
 		this.healthyToppings.forEach( (topping) -> { 
-			System.out.println("名称 : " + topping.getName() + "　値段 : " + topping.getCharge() + "円");
+			System.out.println("名称 : " + topping.getName() + "　値段 : " + topping.getPrice() + "円");
 		});
 	}
 	
 	// トッピングを含めた値段を返す
 	@Override
 	public String itemizeBurger() {
-		int charge = this.charge;
-		for ( Topping topping : this.toppings ) {
-			charge += topping.getCharge();
-		}
+		// TODO: toppings が null だと動かないので Optional したい
+		final int hamburgerToppingPrice = this.toppings
+			.stream()
+			.map( topping -> { return topping.getPrice(); })
+			.reduce( (sum, n) -> { return sum + n; })
+			.get();
 		
-		for ( HealthyTopping topping : this.healthyToppings ) {
-			charge += topping.getCharge();
-		}
+		// TODO: healthyToppings が null だと動かない
+//		final int healthyToppingPrice = this.healthyToppings
+//			.stream()
+//			.map( topping -> { return topping.getPrice(); })
+//			.reduce( (sum, n) -> { return sum + n; })
+//			.get();
 		
-		return "トッピングを加えたバーガーの金額は、" + charge + "円です。";
+//		int charge = this.price;
+//		for ( Topping topping : this.toppings ) {
+//			charge += topping.getPrice();
+//		}
+//		
+//		for ( HealthyTopping topping : this.healthyToppings ) {
+//			charge += topping.getPrice();
+//		}
+		
+		// TODO:  + healthyToppingPrice する
+		return "トッピングを加えたバーガーの金額は、" + ( this.price + hamburgerToppingPrice ) + "円です。";
 	}
 	
 }

@@ -2,19 +2,19 @@ package hamburger;
 
 public class Topping {
 	private String name;
-	private int charge;
+	private int price;
 	
-	public Topping(String name, int charge) {
+	public Topping(String name, int price) {
 		super();
 		this.name = name;
-		this.charge = charge;
+		this.price = price;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getCharge() {
-		return charge;
+	public int getPrice() {
+		return price;
 	}
 }

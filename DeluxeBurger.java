@@ -2,8 +2,8 @@ package hamburger;
 
 public class DeluxeBurger extends Hamburger {
 
-	public DeluxeBurger(String name, String meetType, int charge, String bunsType) {
-		super(name, meetType, charge, bunsType);
+	public DeluxeBurger(String name, String meetType, int price, String bunsType) {
+		super(name, meetType, price, bunsType);
 		
 		super.addTopping(new Topping("ポテト", 100));
 		super.addTopping(new Topping("ドリンク", 100));
