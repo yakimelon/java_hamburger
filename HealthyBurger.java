@@ -32,31 +32,18 @@ public class HealthyBurger extends Hamburger{
 	// トッピングを含めた値段を返す
 	@Override
 	public String itemizeBurger() {
-		// TODO: toppings が null だと動かないので Optional したい
-		final int hamburgerToppingPrice = this.toppings
+		final int hamburgerToppingPrice = this.toppings.size() != 0 ? this.toppings
 			.stream()
 			.map( topping -> { return topping.getPrice(); })
 			.reduce( (sum, n) -> { return sum + n; })
-			.get();
+			.get() : 0;
 		
-		// TODO: healthyToppings が null だと動かない
-//		final int healthyToppingPrice = this.healthyToppings
-//			.stream()
-//			.map( topping -> { return topping.getPrice(); })
-//			.reduce( (sum, n) -> { return sum + n; })
-//			.get();
-		
-//		int charge = this.price;
-//		for ( Topping topping : this.toppings ) {
-//			charge += topping.getPrice();
-//		}
-//		
-//		for ( HealthyTopping topping : this.healthyToppings ) {
-//			charge += topping.getPrice();
-//		}
-		
-		// TODO:  + healthyToppingPrice する
-		return "トッピングを加えたバーガーの金額は、" + ( this.price + hamburgerToppingPrice ) + "円です。";
+		final int healthyToppingPrice = this.healthyToppings.size() != 0 ? this.healthyToppings
+			.stream()
+			.map( topping -> { return topping.getPrice(); })
+			.reduce( (sum, n) -> { return sum + n; })
+			.get() : 0;
+		return "トッピングを加えたバーガーの金額は、" + ( this.price + hamburgerToppingPrice + healthyToppingPrice ) + "円です。";
 	}
 	
 }

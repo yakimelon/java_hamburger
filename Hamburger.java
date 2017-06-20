@@ -44,16 +44,6 @@ class Hamburger {
 	
 	// トッピングを含めた値段を返す
 	public String itemizeBurger() {
-		// TODO: toppingsはnullになることがあるのでOptionalにしたい
-//		Optional<ArrayList> toppingsOpt = Optional.ofNullable(this.toppings);
-//		Optional<Integer> x = toppingsOpt.map(toppings -> {
-//			return toppings
-//				.stream()
-//				.map( topping -> topping.getPrice() )
-//				.reduce( (sum, n) -> sum + n )
-//				.get();
-//		});
-		
 		final int price = this.toppings
 			.stream()
 			.map( topping -> topping.getPrice() )
