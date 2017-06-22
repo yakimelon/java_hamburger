@@ -10,6 +10,7 @@ public class Main {
 	public static void makeStandardBurger() {
 		Hamburger hamburger = new Hamburger("ベーシック", "ソーセージ", 350, "レギュラー");
 		p(hamburger.baseBurger());
+		
 		// トッピング追加
 		Topping tomato = new Topping("トマト", 30);
 		Topping lettuce = new Topping("レタス", 75);
@@ -17,6 +18,8 @@ public class Main {
 		hamburger.addTopping(tomato);
 		hamburger.addTopping(lettuce);
 		hamburger.addTopping(cheese);
+		
+		// トッピングを含めた値段とトッピング一覧を表示
 		p(hamburger.itemizeBurger());
 		hamburger.showTopping();
 		p("\n");
@@ -26,6 +29,7 @@ public class Main {
 	public static void makeHealthyBurger() {
 		HealthyBurger healthyBurger = new HealthyBurger("ライ麦", "ベーコン", 500, "ヘルシー");
 		p(healthyBurger.baseBurger());
+		
 		// 普通のトッピング追加
 		Topping tomato = new Topping("トマト", 30);
 		Topping lettuce = new Topping("レタス", 75);
@@ -36,12 +40,15 @@ public class Main {
 		healthyBurger.addTopping(cheese);
 		healthyBurger.addTopping(egg);
 		p(healthyBurger.itemizeBurger());
+		
 		// ヘルシートッピング追加
 		HealthyTopping avocado = new HealthyTopping("アボカド", 80);
 		HealthyTopping sesame = new HealthyTopping("ゴマ", 30);
 		healthyBurger.addTopping(avocado);
 		healthyBurger.addTopping(sesame);
 		p(healthyBurger.itemizeBurger());
+		
+		// トッピング一覧を表示
 		healthyBurger.showTopping();
 		p("\n");
 	}
@@ -51,9 +58,14 @@ public class Main {
 		DeluxeBurger deluxeBurger = new DeluxeBurger("デラックス", "ベーコン&ソーセージ", 1000, "バンズ&クラブ");
 		p(deluxeBurger.baseBurger());
 		deluxeBurger.showTopping();
+		
 		// デラックスバーガーにトッピングを加えると例外が出る
 		Topping tomato = new Topping("トマト", 30);
-		deluxeBurger.addTopping(tomato);
+		try {
+			deluxeBurger.addTopping(tomato);
+		} catch (IllegalStateException e) {
+			p(e.getMessage());
+		}
 		p("\n");
 	}
 
