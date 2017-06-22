@@ -27,7 +27,7 @@ public class Main {
 
 	// ヘルシーバーガー
 	public static void makeHealthyBurger() {
-		HealthyBurger healthyBurger = new HealthyBurger("ライ麦", "ベーコン", 500, "ヘルシー");
+		HealthyBurger healthyBurger = new HealthyBurger("ヘルシー", "ベーコン", 500, "ライ麦");
 		p(healthyBurger.baseBurger());
 		
 		// 普通のトッピング追加
