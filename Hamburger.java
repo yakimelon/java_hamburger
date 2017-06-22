@@ -26,7 +26,7 @@ class Hamburger {
 
 	// トッピング一覧表示
 	public void showTopping() {
-		this.toppings.forEach( (topping) -> { 
+		this.toppings.forEach( (topping) -> {
 			System.out.println("名称 : " + topping.getName() + "　値段 : " + topping.getPrice() + "円");
 		});
 	}
