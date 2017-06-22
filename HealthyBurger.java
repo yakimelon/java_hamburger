@@ -1,10 +1,13 @@
 package hamburger;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class HealthyBurger extends Hamburger{
 
 	private ArrayList<HealthyTopping> healthyToppings;
+	
+	private final int TOPPING_MAX = 2;
 	
 	public HealthyBurger(String name, String meetType, int price, String bunsType) {
 		super(name, meetType, price, bunsType);
@@ -13,8 +16,8 @@ public class HealthyBurger extends Hamburger{
 	
 	// ヘルシートッピング追加
 	public void addTopping(HealthyTopping topping) {
-		if ( this.healthyToppings.size() >= 2 ) {
-			throw new IllegalStateException("ヘルシートッピングは2つまでです。");
+		if ( this.healthyToppings.size() >= TOPPING_MAX ) {
+			throw new IllegalStateException("ヘルシートッピングは" + TOPPING_MAX + "つまでです。");
 		}
 		System.out.println(topping.getName() + "を " + topping.getPrice() + " 円でヘルシートッピングとして加えます。");
 		this.healthyToppings.add(topping);
@@ -32,18 +35,11 @@ public class HealthyBurger extends Hamburger{
 	// トッピングを含めた値段を返す
 	@Override
 	public String itemizeBurger() {
-		final int hamburgerToppingPrice = this.toppings.size() != 0 ? this.toppings
-			.stream()
-			.map( topping -> { return topping.getPrice(); })
-			.reduce( (sum, n) -> { return sum + n; })
-			.get() : 0;
-		
-		final int healthyToppingPrice = this.healthyToppings.size() != 0 ? this.healthyToppings
-			.stream()
-			.map( topping -> { return topping.getPrice(); })
-			.reduce( (sum, n) -> { return sum + n; })
-			.get() : 0;
-		return "トッピングを加えたバーガーの金額は、" + ( this.price + hamburgerToppingPrice + healthyToppingPrice ) + "円です。";
+		final int toppingPrice  = Stream
+			.concat(this.toppings.stream(), this.healthyToppings.stream())
+			.map( topping -> topping.getPrice() )
+			.reduce( 0, (sum, n) -> sum + n );
+		return "トッピングを加えたバーガーの金額は、" + ( this.price + toppingPrice ) + "円です。";
 	}
 	
 }

@@ -12,6 +12,8 @@ class Hamburger {
 	
 	protected ArrayList<Topping> toppings;
 	
+	private final int TOPPING_MAX = 4;
+	
 	public Hamburger(String name, String meetType, int price, String bunsType) {
 		super();
 		this.name = name;
@@ -30,8 +32,8 @@ class Hamburger {
 	
 	// トッピング追加
 	public void addTopping(Topping topping) {
-		if ( this.toppings.size() >= 4 ) {
-			throw new IllegalStateException("トッピング4つまでです。");
+		if ( this.toppings.size() >= TOPPING_MAX ) {
+			throw new IllegalStateException("トッピングは" + TOPPING_MAX + "つまでです。");
 		}
 		System.out.println(topping.getName() + "を " + topping.getPrice() + " 円で加えます。");
 		this.toppings.add(topping);
@@ -44,11 +46,10 @@ class Hamburger {
 	
 	// トッピングを含めた値段を返す
 	public String itemizeBurger() {
-		final int price = this.toppings.size() != 0 ? this.toppings
+		final int price = this.toppings
 			.stream()
 			.map( topping -> topping.getPrice() )
-			.reduce( (sum, n) -> sum + n )
-			.get() : 0;
+			.reduce( 0, (sum, n) -> sum + n );
 		return "トッピングを加えたバーガーの金額は、" + ( price + this.price ) + "円です。";
 	}
 }
