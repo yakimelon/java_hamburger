@@ -2,6 +2,7 @@ package hamburger;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 
 class Hamburger {
@@ -39,6 +40,15 @@ class Hamburger {
 		this.toppings.add(topping);
 	}
 	
+	// トッピング削除
+	public void deleteTopping(String toppingName) {
+		this.toppings = this.toppings
+			.stream()
+			.filter( topping -> topping.getName() != toppingName )
+			.collect( Collectors.toCollection(ArrayList::new) );
+		System.out.println(toppingName + "のトッピングを消します。");
+	}
+	
 	// このハンバーガーについての説明を返す
 	public String baseBurger() {
 		return "「" + this.bunsType + "」バンズと「" + this.meetType + "」からなる、「" + this.name + "」ハンバーガーの値段は、" + this.price + " 円です。";
@@ -46,10 +56,10 @@ class Hamburger {
 	
 	// トッピングを含めた値段を返す
 	public String itemizeBurger() {
-		final int price = this.toppings
+		final int toppingPrice = this.toppings
 			.stream()
 			.map( topping -> topping.getPrice() )
 			.reduce( 0, (sum, n) -> sum + n );
-		return "トッピングを加えたバーガーの金額は、" + ( price + this.price ) + "円です。";
+		return "トッピングを加えたバーガーの金額は、" + ( toppingPrice + this.price ) + "円です。";
 	}
 }

@@ -1,6 +1,7 @@
 package hamburger;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HealthyBurger extends Hamburger{
@@ -21,6 +22,16 @@ public class HealthyBurger extends Hamburger{
 		}
 		System.out.println(topping.getName() + "を " + topping.getPrice() + " 円でヘルシートッピングとして加えます。");
 		this.healthyToppings.add(topping);
+	}
+	
+	// トッピング削除
+	@Override
+	public void deleteTopping(String toppingName) {
+		super.deleteTopping(toppingName);
+		this.healthyToppings = this.healthyToppings
+			.stream()
+			.filter( topping -> topping.getName() != toppingName )
+			.collect( Collectors.toCollection(ArrayList::new) );
 	}
 	
 	// トッピング一覧表示 (普通のトッピングとヘルシートッピングの両方)
