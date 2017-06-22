@@ -13,7 +13,7 @@ public class HamburgerTest {
 	}
 	
 	@Test
-	public void test_追加したトッピングの値段を含めたハンバーガーの値段が正しい() {
+	public void test_トッピングの値段を含めたハンバーガーの値段が正しい() {
 		Hamburger hamburger = this.makeToppingHamburger();
 		assertThat(hamburger.itemizeBurger(), is("トッピングを加えたバーガーの金額は、605円です。"));	
 	}
